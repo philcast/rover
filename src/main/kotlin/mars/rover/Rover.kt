@@ -1,9 +1,9 @@
 package mars.rover
 
 class Rover(val rows: Int, val cols: Int) {
-    var orientation = Orientation.North
-    var x: Int = cols / 2
-    var y: Int = rows / 2
+    private var orientation = Orientation.North
+    private var x: Int = 0
+    private var y: Int = 0
 
     fun move(input: String): String {
         reset()
@@ -54,6 +54,12 @@ class Rover(val rows: Int, val cols: Int) {
             Orientation.South -> y -= 1
             Orientation.West -> x -= 1
         }
+        fixBounds()
+    }
+
+    private fun fixBounds() {
+        y = (y + rows) % rows
+        x = (x + cols) % cols
     }
 }
 
